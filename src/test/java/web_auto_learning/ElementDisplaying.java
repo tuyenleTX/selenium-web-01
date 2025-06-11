@@ -20,7 +20,18 @@ public class ElementDisplaying {
 
             usernameElem.sendKeys("tomsmith");
             passwordElem.sendKeys("SuperSecretPassword!");
+
+            //get attribute
+            System.out.println("Login button type: " + loginElem.getAttribute("type"));
+            //get color of the button
+            System.out.println("Login button css color: " + loginElem.getCssValue("background-color"));
             loginElem.click();
+
+            driver.navigate().back();//go back to previous page
+            driver.navigate().refresh();//refresh page
+
+
+
 
         } catch (NoSuchElementException e) {
             e.printStackTrace();
