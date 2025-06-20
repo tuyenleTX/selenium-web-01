@@ -1,10 +1,7 @@
 package web_auto_learning;
 
-import Driver.DriverFactory;
-import org.apache.commons.exec.OS;
+import driver.DriverFactory;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 
 public class LaunchBrowser {
     public static void main(String[] args) {

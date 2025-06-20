@@ -1,4 +1,4 @@
-package Driver;
+package driver;
 
 import org.apache.commons.exec.OS;
 import org.openqa.selenium.WebDriver;
@@ -28,6 +28,9 @@ public class DriverFactory {
         WebDriver driver = new ChromeDriver(chromeOptions);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+
+
+
         return driver;
     }
 }
