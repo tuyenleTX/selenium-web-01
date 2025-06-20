@@ -1,6 +1,6 @@
 package web_auto_learning;
 
-import Driver.DriverFactory;
+import driver.DriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
