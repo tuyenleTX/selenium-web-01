@@ -18,10 +18,13 @@ public class IFrame implements Urls {
             WebElement iframeBodyElem = driver.findElement(By.cssSelector("[id$='ifr']"));
             driver.switchTo().frame(iframeBodyElem);
 
-            WebElement editorInputElem = driver.findElement(By.cssSelector("[id='tinymce'] >p"));
+            WebElement editorInputElem = driver.findElement(By.cssSelector("[id='tinymce'] > p"));
             System.out.println(editorInputElem.getText());
 
-            //Thread.sleep(2000); //debug purpose only
+            driver.switchTo().defaultContent();
+            WebElement linkElemSelenium = driver.findElement(By.linkText("Elemental Selenium"));
+            linkElemSelenium.click();
+            Thread.sleep(2000); //debug purpose only
         } catch (Exception e) {
             e.printStackTrace();
         }
