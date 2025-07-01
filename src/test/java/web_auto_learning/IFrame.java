@@ -12,7 +12,8 @@ public class IFrame implements Urls {
         WebDriver driver = DriverFactory.getChromeDriver();
         driver.get(Urls.baseUrl.concat(Urls.iframeSlug));
         try {
-            WebElement closeButtonElem = driver.findElement(By.cssSelector("[class$='tox-notification--warning'] > button"));
+            //WebElement closeButtonElem = driver.findElement(By.cssSelector("[class$='tox-notification--warning'] > button"));
+            WebElement closeButtonElem = driver.findElement(By.xpath("//*[\"@class$='tox-notification--warning'\" and @role='alert']/button"));
             closeButtonElem.click();
 
             WebElement iframeBodyElem = driver.findElement(By.cssSelector("[id$='ifr']"));
