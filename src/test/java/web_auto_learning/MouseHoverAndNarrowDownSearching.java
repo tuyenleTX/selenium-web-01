@@ -29,6 +29,7 @@ public class MouseHoverAndNarrowDownSearching {
                 System.out.println(profileNameElem.getText() + ": "  + profileNameElem.isDisplayed());
                 System.out.println(profileLinkElem.getText() + ": " + profileLinkElem.isDisplayed());
 
+                //after mouse hover
                 actions.moveToElement(e).perform();
                 System.out.println(profileNameElem.getText() + ": "  + profileNameElem.isDisplayed());
                 System.out.println(profileLinkElem.getText() + ": " + profileLinkElem.isDisplayed());

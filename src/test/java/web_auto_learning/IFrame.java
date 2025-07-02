@@ -22,6 +22,7 @@ public class IFrame implements Urls {
             WebElement editorInputElem = driver.findElement(By.cssSelector("[id='tinymce'] > p"));
             System.out.println(editorInputElem.getText());
 
+            //switch to default content
             driver.switchTo().defaultContent();
             WebElement linkElemSelenium = driver.findElement(By.linkText("Elemental Selenium"));
             linkElemSelenium.click();

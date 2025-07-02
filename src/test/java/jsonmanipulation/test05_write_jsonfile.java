@@ -28,7 +28,5 @@ public class test05_write_jsonfile {
         FileWriter fileWriter = new FileWriter("src/test/java/jsonmanipulation/jsonfile05.json");
         fileWriter.write(array.toJSONString());
         fileWriter.flush();
-
-
     }
 }

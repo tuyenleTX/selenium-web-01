@@ -1,5 +1,6 @@
 package stringmanipulation;
 
+import driver.DriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,15 +21,20 @@ public class test08 {
         System.setProperty("webdriver.chrome.driver", prjLocation + chromeLocation);
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--incognito");
-        WebDriver driver = new ChromeDriver(chromeOptions);
+        //WebDriver driver = new ChromeDriver(chromeOptions);
+        WebDriver driver = DriverFactory.getChromeDriver();
         driver.get("https://recruiting2.ultipro.com/MGA1000MGAI/JobBoard/953bfe27-d30f-43cd-bfda-f7e21bb80ed1/?q=&o=postedDateDesc&w=&wc=&we=&wpst=");
         Assert.assertEquals(driver.getTitle(), "My Job Search");
         try {
             WebElement signInElem = driver.findElement(By.xpath("//*[@id='SignInButton']"));
             signInElem.click();
 
-            Thread.sleep(10000);
-            WebElement usernameElem = driver.findElement(By.id("username"));
+            By username = By.id("username");
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+            wait.until(ExpectedConditions.visibilityOfElementLocated(username));
+            WebElement usernameElem = driver.findElement(username);
+
             WebElement passwordElem = driver.findElement(By.id("passphrase"));
             WebElement signInBtnElem = driver.findElement(By.id("button-sign-in"));
 
