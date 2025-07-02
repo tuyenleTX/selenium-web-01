@@ -40,11 +40,11 @@ public class test08 {
 
             usernameElem.click();
            // usernameElem.clear();
-            usernameElem.sendKeys("tuyen.thanh.le.29@gmail.com");
+            usernameElem.sendKeys("");
 
             passwordElem.click();
          //   passwordElem.clear();
-            passwordElem.sendKeys("@GreatJob2025");
+            passwordElem.sendKeys("");
 
             signInBtnElem.click();
 
