@@ -2,6 +2,7 @@ package stringmanipulation;
 
 import driver.DriverFactory;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -29,21 +30,19 @@ public class test08 {
             WebElement signInElem = driver.findElement(By.xpath("//*[@id='SignInButton']"));
             signInElem.click();
 
-            By username = By.id("username");
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
-            wait.until(ExpectedConditions.visibilityOfElementLocated(username));
-            WebElement usernameElem = driver.findElement(username);
-
+            WebElement usernameElem = wait.until(ExpectedConditions.elementToBeClickable(By.id("username")));
             WebElement passwordElem = driver.findElement(By.id("passphrase"));
             WebElement signInBtnElem = driver.findElement(By.id("button-sign-in"));
 
-            usernameElem.click();
-           // usernameElem.clear();
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("arguments[0].scrollIntoView(true);", usernameElem);
+            //usernameElem.clear();
             usernameElem.sendKeys("tuyen.thanh.le.29@gmail.com");
 
             passwordElem.click();
-         //   passwordElem.clear();
+            //   passwordElem.clear();
             passwordElem.sendKeys("@GreatJob2025");
 
             signInBtnElem.click();
@@ -54,8 +53,8 @@ public class test08 {
 
             WebElement logoutBtnElem = driver.findElement(By.xpath("//*[@id='ukg-menu-LogOutButton']"));
             logoutBtnElem.click();
-         //   Thread.sleep(2000);
-        }catch (Exception e) {
+            //   Thread.sleep(2000);
+        } catch (Exception e) {
             e.printStackTrace();
         }
         driver.quit();
