@@ -30,19 +30,11 @@ public class test08 {
             WebElement signInElem = driver.findElement(By.xpath("//*[@id='SignInButton']"));
             signInElem.click();
 
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-
-            WebElement usernameElem = wait.until(ExpectedConditions.elementToBeClickable(By.id("username")));
-            WebElement passwordElem = driver.findElement(By.id("passphrase"));
+            WebElement usernameElem = driver.findElement(By.xpath("//*[@id='username']//input"));
+            WebElement passwordElem = driver.findElement(By.xpath("//*[@id='passphrase']//input"));
             WebElement signInBtnElem = driver.findElement(By.id("button-sign-in"));
 
-            JavascriptExecutor js = (JavascriptExecutor) driver;
-            js.executeScript("arguments[0].scrollIntoView(true);", usernameElem);
-            //usernameElem.clear();
             usernameElem.sendKeys("tuyen.thanh.le.29@gmail.com");
-
-            passwordElem.click();
-            //   passwordElem.clear();
             passwordElem.sendKeys("@GreatJob2025");
 
             signInBtnElem.click();
@@ -51,6 +43,7 @@ public class test08 {
             String profileName = profileElem.getText();
             Assert.assertEquals(profileName, "Thanh Tuyen Le");
 
+            profileElem.click();
             WebElement logoutBtnElem = driver.findElement(By.xpath("//*[@id='ukg-menu-LogOutButton']"));
             logoutBtnElem.click();
             //   Thread.sleep(2000);
