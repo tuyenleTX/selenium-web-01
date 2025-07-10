@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
-public class loginsaucedemo {
+public class LoginSauceDemo {
     public static void main(String[] args) {
         WebDriver driver = DriverFactory.getChromeDriver();
         driver.get("https://www.saucedemo.com/");
