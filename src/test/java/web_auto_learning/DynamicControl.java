@@ -13,6 +13,7 @@ import java.time.Duration;
 public class DynamicControl implements Urls {
     private final static By checkbox_example = By.id("checkbox-example");
     private final static By input_example = By.id("input-example");
+
     public static void main(String[] args) {
         WebDriver driver = DriverFactory.getChromeDriver();
         driver.get(Urls.baseUrl.concat(dynamicControlSlug));

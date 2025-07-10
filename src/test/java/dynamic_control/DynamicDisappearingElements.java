@@ -1,4 +1,4 @@
-package web_auto_learning;
+package dynamic_control;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
