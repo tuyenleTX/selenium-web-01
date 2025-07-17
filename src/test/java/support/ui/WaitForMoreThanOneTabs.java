@@ -3,22 +3,21 @@ package support.ui;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class WaitForElementEnabled implements ExpectedCondition<Boolean> {
-    private By selector;
+public class WaitForMoreThanOneTabs implements ExpectedCondition<Boolean> {
+    private final By selector;
 
-    public WaitForElementEnabled(By selector) {
+    public WaitForMoreThanOneTabs(By selector) {
         this.selector = selector;
     }
     @Override
     public Boolean apply(WebDriver driver) {
-        return driver.findElement(selector).isEnabled();
+        return driver.getWindowHandles().size() > 1;
     }
 
     @Override
     public String toString() {
-        return "WaitForElementEnabled{" +
+        return "WaitForMoreThanOneTabs{" +
                 "selector=" + selector +
                 '}';
     }
