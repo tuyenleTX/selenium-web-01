@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Component {
+
     protected WebDriver driver;
     protected WebElement component;
     protected WebDriverWait wait;
@@ -20,45 +21,64 @@ public class Component {
     public Component(WebDriver driver, WebElement component) {
         this.driver = driver;
         this.component = component;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        this.wait = new WebDriverWait(this.driver, Duration.ofSeconds(15));
     }
 
-    public WebElement findElement (By id) {
-        return component.findElement(id);
+    public WebElement findElement(By by) {
+        return component.findElement(by);
     }
-    public List<WebElement> findElements(By id) {
-        return component.findElements(id);
+
+    public List<WebElement> findElements(By by) {
+        return component.findElements(by);
     }
+
     public <T extends Component> T findComponent(Class<T> componentClass, WebDriver driver) {
         return findComponents(componentClass, driver).get(0);
     }
 
     public <T extends Component> List<T> findComponents(Class<T> componentClass, WebDriver driver) {
-        String cssSelector;
-        try {
-            cssSelector = componentClass.getAnnotation(ComponentCSSSelector.class).value();
-        } catch (Exception e) {
-            throw new IllegalArgumentException("[ERR] The component must have a css selector");
-        }
-        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(cssSelector)));
-        List<WebElement> results = component.findElements(By.cssSelector(cssSelector));
 
+        // Get Component selector
+        By componentSelector;
+        try {
+            componentSelector = getCompSelector(componentClass);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("[ERR] The component must have a css selector!");
+        }
+        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(componentSelector));
+        List<WebElement> results = component.findElements(componentSelector);
+
+        // Define component class constructor params
         Class<?>[] params = new Class[]{WebDriver.class, WebElement.class};
         Constructor<T> constructor;
         try {
             constructor = componentClass.getConstructor(params);
-        }catch (Exception e) {
-            throw new IllegalArgumentException("[ERR] The component must have a constructor with params: " + Arrays.toString(params));
+        } catch (Exception e) {
+            throw new IllegalArgumentException(
+                    "[ERR] The component must have a constructor with params " + Arrays.toString(params));
         }
 
+        // Convert all elements to components
         List<T> components = results.stream().map(webElement -> {
             try {
                 return constructor.newInstance(driver, webElement);
-            }catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             return null;
         }).collect(Collectors.toList());
+
         return components;
+    }
+
+    private By getCompSelector(Class<? extends Component> componentClass) {
+        if (componentClass.isAnnotationPresent(ComponentCssSelector.class)) {
+            return By.cssSelector(componentClass.getAnnotation(ComponentCssSelector.class).value());
+        } else if (componentClass.isAnnotationPresent(ComponentXpathSelector.class)) {
+            return By.xpath(componentClass.getAnnotation(ComponentXpathSelector.class).value());
+        } else {
+            throw new IllegalArgumentException("Component class " + componentClass + " must have annotation "
+                    + ComponentCssSelector.class.getSimpleName() + " or " + ComponentXpathSelector.class.getSimpleName());
+        }
     }
 }

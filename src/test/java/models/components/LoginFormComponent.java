@@ -3,7 +3,7 @@ package models.components;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-@ComponentCSSSelector(value = "#login")
+@ComponentCssSelector(value = "#login")
 public class LoginFormComponent {
     private final WebDriver driver;
     private final static By usernameSel = By.id("username");

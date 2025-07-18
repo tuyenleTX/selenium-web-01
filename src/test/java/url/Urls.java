@@ -7,4 +7,5 @@ public interface Urls {
    String hoverSlug = "hovers";
    String javaScriptSlug = "javascript_alerts";
    String dynamicControlSlug = "dynamic_controls";
+   String demoBaseUrl = "https://demowebshop.tricentis.com/";
 }
