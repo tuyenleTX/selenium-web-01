@@ -1,13 +1,21 @@
 package dynamic_control;
 
 import driver.DriverFactory;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+
+
 public class LoginSauceDemo {
-    public static void main(String[] args) {
+/*    @Epic("Login Feature")
+    @Feature("Valid Login")
+    @Story("User logs in with valid credentials")
+    @Severity(SeverityLevel.CRITICAL)*/
+  // @Test(description = "Verify user can login with valid credentials")
+    public void main(String[] args) {
         WebDriver driver = DriverFactory.getChromeDriver();
         driver.get("https://www.saucedemo.com/");
         try {

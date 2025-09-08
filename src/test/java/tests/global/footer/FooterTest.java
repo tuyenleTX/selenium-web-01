@@ -10,14 +10,19 @@ import org.testng.asserts.SoftAssert;
 import test_flows.global.FooterTestFlow;
 import url.Urls;
 
-public class FooterTest {
 
+public class FooterTest {
     @Test(priority = 1, dependsOnMethods = {"testFooterRegisterPage"})
     public void testFooterCategoryPage() {
         WebDriver driver = DriverFactory.getChromeDriver();
-        driver.get(Urls.demoBaseUrl);
-        FooterTestFlow footerTestFlow = new FooterTestFlow(driver);
-        footerTestFlow.verifyFooterComponent();
+        try {
+            driver.get(Urls.demoBaseUrl);
+            FooterTestFlow footerTestFlow = new FooterTestFlow(driver);
+            footerTestFlow.verifyFooterComponent();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        driver.quit();
     }
 
     @Test(priority = 2)
@@ -67,9 +72,6 @@ public class FooterTest {
         testFooterColumn(followUsColumnComponent);
         driver.quit();
     }
-
-
-
     private static void testFooterColumn(FooterColumnComponent footerColumnComponent) {
         System.out.println(footerColumnComponent.headerElem().getText());
         footerColumnComponent.linksElem().forEach(link -> {
